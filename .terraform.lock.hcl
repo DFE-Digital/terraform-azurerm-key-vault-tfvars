@@ -2,21 +2,22 @@
 # Manual edits may be lost in future updates.
 
 provider "registry.terraform.io/hashicorp/azuread" {
-  version = "2.36.0"
+  version     = "2.37.1"
+  constraints = ">= 2.3.6"
   hashes = [
-    "h1:TKY/l18DPq9h0AjIHUn6xs8UxQ7vPDh3rgMSIJNXWp8=",
-    "zh:0eb7307cdcd250a2dc5af58774544e5a05295b01f3a15c13a0c57493fac4159b",
+    "h1:HWiWKokv3TbuhNcH77+hv1EaKUbX54xkj7KVSZGSiu4=",
+    "zh:13526e11f6466883aecf2e79874c9c7c8d29f9948b201d9a9573bf7e188d1b4e",
     "zh:1c3e89cf19118fc07d7b04257251fc9897e722c16e0a0df7b07fcd261f8c12e7",
-    "zh:3e75a622c0728f9ac8c367055fea9b2be8864668af6458e4e41c32a77d359f82",
-    "zh:7155543c317a7bd7c71fa409a3a3ba4b5ecc94156856239dc2677aaaffb1364a",
-    "zh:75c69fa8fc29245fccc9c32266688c94d9369b6ad0c51f255aac031f3bbfa08f",
-    "zh:7aa91589fc3ee509b5607f59e9ce3ee7db3ffc3673b6429d53c9b5f751672700",
-    "zh:a95e5f3a18d787ea1e6e0842037a777e7e55dee4734935c0de1b2bb177a1ac8c",
-    "zh:ba801f8510cbc8abc3cd6a9531e30ce936a7749a6b8d290e03afe9da72e825a2",
-    "zh:c51ef07fbc8a3dbdcc44adfaa1d261fb85837c128e813fb4cec41a045d91aead",
-    "zh:dcabd9661b6c6be3af18245e36c40a1e5b28b640a00391815c1c0a5c8a78edbc",
-    "zh:e82a6eb86837131094c324e53837dd4f2fe30b91f85ec15dd02364c7f9c7bfa8",
-    "zh:ffc2e2ed2a56c6403f124c0a1b5c4b91eafa7dab872a2e164cc60c3af6b4458f",
+    "zh:327d9d9e84a9b8a0902a8083c97f5aa08dccf2c39c3f24869ab456eedce7e6af",
+    "zh:44d53a5697efbf756afff9e6c2c771d1cf5aca5e1e49f0ae3a1aaaeb79208996",
+    "zh:7cdcb7294c2b8be168198762d658b8dde6ce43030bb736d223eb48e143e82055",
+    "zh:9d9c799ffaee052a49569f93b4540f2f84ebc3cab29a9fa87a3505d3c07dee7f",
+    "zh:abe48e50a8d0565a525ac5e963a15fae7a6bc5b1ef1e399dbb458e3b95bd1024",
+    "zh:c57b7e1329bc4ee1de62f117253b9848ee41b037d655e5225d329ce6fa6233d3",
+    "zh:d253bd91bd4915fab0e42334942d4ef40b59dfd22b68e72b9c81984d913a44ad",
+    "zh:dbdc689842722c545ea36b5070a4d3be1f7d164ed15ef28960b9a81400e644c6",
+    "zh:f4d8d620db78c95023db3dce08fc2432dce21217e5e463a7e1c9e5e362c75f0e",
+    "zh:f8a4cd3e03d45a89894942e30324ab3197ff881dce2da1a1948dc29321245bb8",
   ]
 }
 
