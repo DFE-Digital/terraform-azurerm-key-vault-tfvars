@@ -105,3 +105,15 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "generate_key_vault_key" {
+  description = "Generate a Key Vault Key to be used for encrypting tfvars"
+  type        = bool
+  default     = true
+}
+
+variable "encrypt_tfvars" {
+  description = "Encrypt the TF Vars file with a generated Key Vault Key"
+  type        = bool
+  default     = true
+}

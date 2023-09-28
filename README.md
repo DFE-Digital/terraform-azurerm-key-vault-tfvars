@@ -73,6 +73,7 @@ module "azure_key_vault_tfvars" {
 | Name | Type |
 |------|------|
 | [azurerm_key_vault.tfvars](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault) | resource |
+| [azurerm_key_vault_key.generated](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_key) | resource |
 | [azurerm_key_vault_secret.tfvars](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_log_analytics_workspace.key_vault](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/log_analytics_workspace) | resource |
 | [azurerm_management_lock.default](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_lock) | resource |
@@ -81,6 +82,7 @@ module "azure_key_vault_tfvars" {
 | [azurerm_storage_account.logs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) | resource |
 | [azuread_user.key_vault_access](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/data-sources/user) | data source |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config) | data source |
+| [azurerm_key_vault_encrypted_value.encrypted](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_encrypted_value) | data source |
 | [azurerm_resource_group.existing_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/resource_group) | data source |
 
 ## Inputs
@@ -97,8 +99,10 @@ module "azure_key_vault_tfvars" {
 | <a name="input_enable_diagnostic_storage_account"></a> [enable\_diagnostic\_storage\_account](#input\_enable\_diagnostic\_storage\_account) | When enabled, creates a Storage Account for the diagnostic logs, if one hasn't been specified for `diagnostic_storage_account_id` | `bool` | `false` | no |
 | <a name="input_enable_log_analytics_workspace"></a> [enable\_log\_analytics\_workspace](#input\_enable\_log\_analytics\_workspace) | When enabled, creates a Log Analyics Workspace, if one hasn't been specified for `diagnostic_log_analytics_workspace_id` | `bool` | `false` | no |
 | <a name="input_enable_resource_group_lock"></a> [enable\_resource\_group\_lock](#input\_enable\_resource\_group\_lock) | Enabling this will add a Resource Lock to the Resource Group preventing any resources from being deleted. | `bool` | `false` | no |
+| <a name="input_encrypt_tfvars"></a> [encrypt\_tfvars](#input\_encrypt\_tfvars) | Encrypt the TF Vars file with a generated Key Vault Key | `bool` | `true` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment name. Will be used along with `project_name` as a prefix for all resources. | `string` | n/a | yes |
 | <a name="input_existing_resource_group"></a> [existing\_resource\_group](#input\_existing\_resource\_group) | Name of an existing Resource Group to create the Key Vault within. If left empty, one will be created. | `string` | `""` | no |
+| <a name="input_generate_key_vault_key"></a> [generate\_key\_vault\_key](#input\_generate\_key\_vault\_key) | Generate a Key Vault Key to be used for encrypting tfvars | `bool` | `true` | no |
 | <a name="input_key_vault_access_ipv4"></a> [key\_vault\_access\_ipv4](#input\_key\_vault\_access\_ipv4) | List of IPv4 Addresses that are permitted to access the Key Vault | `list(string)` | n/a | yes |
 | <a name="input_key_vault_access_subnet_ids"></a> [key\_vault\_access\_subnet\_ids](#input\_key\_vault\_access\_subnet\_ids) | List of Azure Subnet IDs that are permitted to access the Key Vault | `list(string)` | `[]` | no |
 | <a name="input_key_vault_access_users"></a> [key\_vault\_access\_users](#input\_key\_vault\_access\_users) | List of users that require access to the Key Vault. This should be a list of User Principle Names (Found in Active Directory) that need to run terraform | `list(string)` | n/a | yes |
@@ -109,5 +113,7 @@ module "azure_key_vault_tfvars" {
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_key_vault_key_id"></a> [key\_vault\_key\_id](#output\_key\_vault\_key\_id) | The Key Vault Key ID |
 <!-- END_TF_DOCS -->
