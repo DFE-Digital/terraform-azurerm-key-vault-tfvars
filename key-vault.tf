@@ -15,10 +15,7 @@ resource "azurerm_key_vault" "tfvars" {
       tenant_id = data.azurerm_client_config.current.tenant_id
       object_id = access_policy.value["object_id"]
 
-      key_permissions = [
-        "Create",
-        "Get",
-      ]
+      key_permissions = local.key_vault_key_permissions
 
       secret_permissions = [
         "Set",
@@ -41,10 +38,47 @@ resource "azurerm_key_vault" "tfvars" {
   tags = local.tags
 }
 
+data "azurerm_key_vault_encrypted_value" "encrypted" {
+  count = local.encrypt_tfvars ? 1 : 0
+
+  key_vault_key_id = azurerm_key_vault_key.generated[0].id
+  algorithm        = "RSA1_5"
+  plain_text_value = base64encode(file(local.tfvars_filename))
+}
+
 resource "azurerm_key_vault_secret" "tfvars" {
   name            = "${local.resource_prefix}-tfvars"
-  value           = base64encode(file(local.tfvars_filename))
+  value           = local.encrypt_tfvars ? base64encode(file(local.tfvars_filename)) : data.azurerm_key_vault_encrypted_value.encrypted[0].encrypted_data
   key_vault_id    = azurerm_key_vault.tfvars.id
   content_type    = "text/plain+base64"
   expiration_date = local.year_from_now
+
+  tags = local.tags
+}
+
+resource "azurerm_key_vault_key" "generated" {
+  count = local.generate_key_vault_key ? 1 : 0
+
+  name            = "${local.resource_prefix}-tfvars"
+  key_vault_id    = azurerm_key_vault.tfvars.id
+  key_type        = "RSA"
+  key_size        = 4096
+  expiration_date = local.year_from_now
+
+  key_opts = [
+    "decrypt",
+    "encrypt",
+    "verify",
+  ]
+
+  rotation_policy {
+    automatic {
+      time_before_expiry = "P30D"
+    }
+
+    expire_after         = "P90D"
+    notify_before_expiry = "P29D"
+  }
+
+  tags = local.tags
 }
