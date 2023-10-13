@@ -65,7 +65,7 @@ module "azure_key_vault_tfvars" {
 | Name | Version |
 |------|---------|
 | <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.43.0 |
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.75.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.76.0 |
 | <a name="provider_null"></a> [null](#provider\_null) | 3.2.1 |
 
 ## Resources
