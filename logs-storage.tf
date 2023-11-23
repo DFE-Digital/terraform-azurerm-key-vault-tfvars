@@ -11,6 +11,7 @@ resource "azurerm_storage_account" "logs" {
   enable_https_traffic_only       = true
   public_network_access_enabled   = false
   allow_nested_items_to_be_public = false
+  shared_access_key_enabled       = false
 
   tags = local.tags
 }
@@ -20,7 +21,7 @@ resource "azurerm_storage_account_network_rules" "logs" {
 
   storage_account_id         = azurerm_storage_account.logs[0].id
   default_action             = "Deny"
-  bypass                     = ["Logging"]
+  bypass                     = ["AzureServices"]
   virtual_network_subnet_ids = []
   ip_rules                   = []
 }
