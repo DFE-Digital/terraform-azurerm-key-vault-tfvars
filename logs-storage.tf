@@ -20,7 +20,7 @@ resource "azurerm_storage_account_network_rules" "logs" {
 
   storage_account_id         = azurerm_storage_account.logs[0].id
   default_action             = "Deny"
-  bypass                     = ["AzureServices"]
+  bypass                     = ["Logging"]
   virtual_network_subnet_ids = []
   ip_rules                   = []
 }
