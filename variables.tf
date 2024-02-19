@@ -41,6 +41,12 @@ variable "key_vault_access_subnet_ids" {
   default     = []
 }
 
+variable "key_vault_access_use_rbac_authorization" {
+  description = "Use RBAC to handle access controls for the Key Vault"
+  type        = bool
+  default     = false
+}
+
 variable "tfvars_filename" {
   description = "tfvars filename. This file is uploaded and stored encrupted within Key Vault, to ensure that the latest tfvars are stored in a shared place."
   type        = string

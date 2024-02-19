@@ -19,9 +19,13 @@ module "azure_key_vault_tfvars" {
   enable_resource_group_lock =  false
   azure_location             = "uk-south"
 
-  key_vault_access_users = [
-    "my_email.address.suffix#EXT#@platformidentity.onmicrosoft.com",
-  ]
+  # (legacy) Grant access to Key Vault using Access Policy
+  # key_vault_access_users = [
+  #   "my_email.address.suffix#EXT#@platformidentity.onmicrosoft.com",
+  # ]
+
+  # (Preferred) Leverage Azure RBAC to grant access to Key Vault
+  key_vault_access_use_rbac_authorization = true
 
   # List of IPV4 Addresses that are permitted to access the Key Vault
   key_vault_access_ipv4 = [
@@ -102,6 +106,7 @@ module "azure_key_vault_tfvars" {
 | <a name="input_existing_resource_group"></a> [existing\_resource\_group](#input\_existing\_resource\_group) | Name of an existing Resource Group to create the Key Vault within. If left empty, one will be created. | `string` | `""` | no |
 | <a name="input_key_vault_access_ipv4"></a> [key\_vault\_access\_ipv4](#input\_key\_vault\_access\_ipv4) | List of IPv4 Addresses that are permitted to access the Key Vault | `list(string)` | n/a | yes |
 | <a name="input_key_vault_access_subnet_ids"></a> [key\_vault\_access\_subnet\_ids](#input\_key\_vault\_access\_subnet\_ids) | List of Azure Subnet IDs that are permitted to access the Key Vault | `list(string)` | `[]` | no |
+| <a name="input_key_vault_access_use_rbac_authorization"></a> [key\_vault\_access\_use\_rbac\_authorization](#input\_key\_vault\_access\_use\_rbac\_authorization) | Use RBAC to handle access controls for the Key Vault | `bool` | `false` | no |
 | <a name="input_key_vault_access_users"></a> [key\_vault\_access\_users](#input\_key\_vault\_access\_users) | List of users that require access to the Key Vault. This should be a list of User Principle Names (Found in Active Directory) that need to run terraform | `list(string)` | n/a | yes |
 | <a name="input_project_name"></a> [project\_name](#input\_project\_name) | Project name. Will be used along with `environment` as a prefix for all resources. | `string` | n/a | yes |
 | <a name="input_secret_expiry_years"></a> [secret\_expiry\_years](#input\_secret\_expiry\_years) | Number of years from now when the Key Vault secret should be considered expired | `number` | `5` | no |
