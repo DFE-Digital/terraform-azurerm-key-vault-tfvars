@@ -45,7 +45,7 @@ resource "null_resource" "check_key_vault_secret_age_against_local_tfvars" {
   count = local.enable_tfvars_file_age_check ? 1 : 0
 
   provisioner "local-exec" {
-    interpreter = ["/bin/bash", "-c"]
+    interpreter = [local.bash, "-c"]
     command     = "${path.module}/scripts/check-key-vault-secret-age-against-local-tfvars.sh -v \"${azurerm_key_vault.tfvars.name}\" -s \"${local.resource_prefix}-tfvars\" -f ${local.tfvars_filename}"
   }
 

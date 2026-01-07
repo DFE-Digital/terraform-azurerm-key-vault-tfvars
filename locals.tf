@@ -27,4 +27,7 @@ locals {
   secret_expiry_years      = var.secret_expiry_years
   timestamp_parts          = regex("^(?P<year>\\d+)(?P<remainder>-.*)$", timestamp())
   year_from_now            = format("%d%s", local.timestamp_parts.year + local.secret_expiry_years, local.timestamp_parts.remainder)
+
+  is_windows = can(regex("^[A-Za-z]:", abspath(path.root)))
+  bash       = local.is_windows ? "C:/Program Files/Git/bin/bash.exe" : "/bin/bash"
 }
