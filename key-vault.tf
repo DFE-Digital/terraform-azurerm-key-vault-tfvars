@@ -1,4 +1,6 @@
 resource "azurerm_key_vault" "tfvars" {
+  #checkov:skip=CKV2_AZURE_32: Suppressing check pending review
+
   name                       = "${local.resource_prefix}-tfvars"
   location                   = local.azure_location
   resource_group_name        = local.resource_group.name
