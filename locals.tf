@@ -26,11 +26,17 @@ locals {
   diagnostic_storage_account_id = var.diagnostic_storage_account_id != "" ? var.diagnostic_storage_account_id : (
     local.enable_diagnostic_storage_account ? azurerm_storage_account.logs[0].id : null
   )
-  diagnostic_eventhub_name = var.diagnostic_eventhub_name != "" ? var.diagnostic_eventhub_name : null
-  tags                     = var.tags
-  secret_expiry_years      = var.secret_expiry_years
-  timestamp_parts          = regex("^(?P<year>\\d+)(?P<remainder>-.*)$", timestamp())
-  year_from_now            = format("%d%s", local.timestamp_parts.year + local.secret_expiry_years, local.timestamp_parts.remainder)
+  diagnostic_eventhub_name                = var.diagnostic_eventhub_name != "" ? var.diagnostic_eventhub_name : null
+  enable_monitoring                       = var.enable_monitoring && local.enable_log_analytics_workspace
+  monitor_email_receivers                 = var.monitor_email_receivers
+  monitor_logic_app_workflow              = var.monitor_logic_app_workflow
+  monitor_logic_app_workflow_name         = local.monitor_logic_app_workflow.name == "" ? "" : data.azurerm_logic_app_workflow.monitor_logic_app_workflow[0].name
+  monitor_logic_app_workflow_id           = local.monitor_logic_app_workflow.name == "" ? "" : data.azurerm_logic_app_workflow.monitor_logic_app_workflow[0].id
+  monitor_logic_app_workflow_callback_url = local.monitor_logic_app_workflow.name == "" ? "" : data.azapi_resource_action.monitor_logic_app_workflow[0].output.value
+  tags                                    = var.tags
+  secret_expiry_years                     = var.secret_expiry_years
+  timestamp_parts                         = regex("^(?P<year>\\d+)(?P<remainder>-.*)$", timestamp())
+  year_from_now                           = format("%d%s", local.timestamp_parts.year + local.secret_expiry_years, local.timestamp_parts.remainder)
 
   is_windows = can(regex("^[A-Za-z]:", abspath(path.root)))
   bash       = local.is_windows ? "C:/Program Files/Git/bin/bash.exe" : "/bin/bash"

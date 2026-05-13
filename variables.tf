@@ -124,6 +124,30 @@ variable "diagnostic_storage_account_id" {
   default     = ""
 }
 
+variable "enable_monitoring" {
+  description = "Enable Key Vault monitoring"
+  type        = bool
+  default     = false
+}
+
+variable "monitor_email_receivers" {
+  description = "A list of email addresses that should be notified by monitoring alerts"
+  type        = list(string)
+  default     = []
+}
+
+variable "monitor_logic_app_workflow" {
+  description = "Name, Resource Group and HTTP Trigger URL of an existing Logic App Workflow to route Alerts to"
+  type = object({
+    name : string
+    resource_group_name : string
+  })
+  default = {
+    name                = ""
+    resource_group_name = ""
+  }
+}
+
 variable "tags" {
   description = "Tags to be applied to all resources"
   type        = map(string)
