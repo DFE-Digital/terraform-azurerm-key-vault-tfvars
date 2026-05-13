@@ -23,6 +23,8 @@ locals {
     local.enable_diagnostic_storage_account ? azurerm_storage_account.logs[0].id : null
   )
   diagnostic_eventhub_name = var.diagnostic_eventhub_name != "" ? var.diagnostic_eventhub_name : null
+  enable_monitoring        = var.enable_monitoring && local.enable_log_analytics_workspace
+  monitor_email_receivers  = var.monitor_email_receivers
   tags                     = var.tags
   secret_expiry_years      = var.secret_expiry_years
   timestamp_parts          = regex("^(?P<year>\\d+)(?P<remainder>-.*)$", timestamp())
