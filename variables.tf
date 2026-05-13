@@ -100,6 +100,18 @@ variable "diagnostic_storage_account_id" {
   default     = ""
 }
 
+variable "enable_monitoring" {
+  description = "Enable Key Vault monitoring"
+  type        = bool
+  default     = false
+}
+
+variable "monitor_email_receivers" {
+  description = "A list of email addresses that should be notified by monitoring alerts"
+  type        = list(string)
+  default     = []
+}
+
 variable "tags" {
   description = "Tags to be applied to all resources"
   type        = map(string)
