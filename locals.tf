@@ -15,6 +15,10 @@ locals {
   enable_diagnostic_setting               = var.enable_diagnostic_setting
   enable_diagnostic_storage_account       = var.diagnostic_storage_account_id == "" ? var.enable_diagnostic_storage_account : false
   enable_log_analytics_workspace          = var.diagnostic_log_analytics_workspace_id == "" ? var.enable_log_analytics_workspace : false
+  enable_private_endpoint                 = var.enable_private_endpoint
+  virtual_network_id                      = var.virtual_network_id
+  virtual_network_name                    = var.virtual_network_name
+  key_vault_subnet_cidr                   = var.key_vault_subnet_cidr
   diagnostic_log_analytics_workspace_id = var.diagnostic_log_analytics_workspace_id != "" ? var.diagnostic_log_analytics_workspace_id : (
     local.enable_log_analytics_workspace ? azurerm_log_analytics_workspace.key_vault[0].id : null
   )

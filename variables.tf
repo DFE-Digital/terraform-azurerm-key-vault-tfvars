@@ -76,6 +76,30 @@ variable "enable_log_analytics_workspace" {
   default     = false
 }
 
+variable "enable_private_endpoint" {
+  description = "When enabled, creates a Private Endpoint for the Key Vault"
+  type        = bool
+  default     = false
+}
+
+variable "virtual_network_id" {
+  description = "The ID of the virtual network for the private endpoint"
+  type        = string
+  default     = ""
+}
+
+variable "virtual_network_name" {
+  description = "The name of the virtual network for the private endpoint"
+  type        = string
+  default     = ""
+}
+
+variable "key_vault_subnet_cidr" {
+  description = "The CIDR to assign to the key vault subnet"
+  type        = string
+  default     = ""
+}
+
 variable "diagnostic_log_analytics_workspace_id" {
   description = "Specify a Log Analytics Workspace ID to send Diagnostic information to"
   type        = string
