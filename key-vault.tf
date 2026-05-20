@@ -1,12 +1,13 @@
 resource "azurerm_key_vault" "tfvars" {
-  name                       = "${local.resource_prefix}-tfvars"
-  location                   = local.azure_location
-  resource_group_name        = local.resource_group.name
-  tenant_id                  = data.azurerm_client_config.current.tenant_id
-  sku_name                   = "standard"
-  soft_delete_retention_days = 7
-  enable_rbac_authorization  = local.key_vault_access_use_rbac_authorization
-  purge_protection_enabled   = true
+  name                          = "${local.resource_prefix}-tfvars"
+  location                      = local.azure_location
+  resource_group_name           = local.resource_group.name
+  tenant_id                     = data.azurerm_client_config.current.tenant_id
+  sku_name                      = "standard"
+  soft_delete_retention_days    = 7
+  enable_rbac_authorization     = local.key_vault_access_use_rbac_authorization
+  purge_protection_enabled      = true
+  public_network_access_enabled = local.enable_private_endpoint ? false : true
 
   dynamic "access_policy" {
     for_each = data.azuread_user.key_vault_access
