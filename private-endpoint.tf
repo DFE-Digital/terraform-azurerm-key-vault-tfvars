@@ -21,7 +21,7 @@ resource "azurerm_private_endpoint" "kv" {
 resource "azurerm_private_dns_zone" "kv_private_link" {
   count = local.enable_private_endpoint ? 1 : 0
 
-  name                = "privatelink.vaultcore.azure.net"
+  name                = "${local.resource_prefix}-privatelink.vaultcore.azure.net"
   resource_group_name = data.azurerm_resource_group.existing_resource_group[0].name
   tags                = local.tags
 }
