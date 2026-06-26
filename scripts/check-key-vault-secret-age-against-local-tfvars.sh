@@ -68,7 +68,14 @@ then
 fi
 
 SECRET_UPDATED=$(echo "$SECRET_UPDATED" | cut -d'+' -f1)
-SECRET_UPDATED_SECONDS=$(date -j -f "%Y-%m-%dT%H:%M:%S" "$SECRET_UPDATED" "+%s")
+
+if date --version >/dev/null 2>&1; then
+  # GNU
+  SECRET_UPDATED_SECONDS=$(date -d "$SECRET_UPDATED" "+%s")
+else
+  # Unix
+  SECRET_UPDATED_SECONDS=$(date -j -f "%Y-%m-%dT%H:%M:%S" "$SECRET_UPDATED" "+%s")
+fi
 
 if [ "$SECRET_UPDATED_SECONDS" -gt "$(date -r "$LOCAL_TFVARS_FILE_NAME" +%s)" ]
 then
