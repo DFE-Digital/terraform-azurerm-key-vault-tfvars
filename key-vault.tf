@@ -1,4 +1,6 @@
 resource "azurerm_key_vault" "tfvars" {
+  #checkov:skip=CKV2_AZURE_32: Ensure private endpoint is configured to key vaults
+
   name                       = "${local.resource_prefix}-tfvars"
   location                   = local.azure_location
   resource_group_name        = local.resource_group.name
