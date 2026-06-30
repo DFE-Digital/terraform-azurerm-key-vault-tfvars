@@ -11,3 +11,10 @@ data "azurerm_resource_group" "existing_resource_group" {
 
   name = local.existing_resource_group
 }
+
+data "azurerm_logic_app_workflow" "monitor_logic_app_workflow" {
+  count = local.monitor_logic_app_workflow.name == "" ? 0 : 1
+
+  name                = local.monitor_logic_app_workflow.name
+  resource_group_name = local.monitor_logic_app_workflow.resource_group_name
+}
